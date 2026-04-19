@@ -1,14 +1,1 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Run Job1') {
-            when {
-                changeset "**/file2"
-            }
-            steps {
-                echo "Job1 triggered due to file1 change 🚀"
-            }
-        }
-    }
-}
+echo "second file2"
