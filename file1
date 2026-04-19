@@ -1,1 +1,14 @@
-echo "this is file1"
+pipeline {
+    agent any
+
+    stages {
+        stage('Run Job1') {
+            when {
+                changeset "**/file1"
+            }
+            steps {
+                echo "Job1 triggered due to file1 change 🚀"
+            }
+        }
+    }
+}
