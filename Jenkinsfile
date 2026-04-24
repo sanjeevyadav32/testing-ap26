@@ -1,19 +1,33 @@
-stage('Detect Changes') {
-    steps {
-        script {
-            def changes = sh(
-                script: "git diff --name-only HEAD~1",
-                returnStdout: true
-            ).trim()
+pipeline {
+    agent any
 
-            echo "Changed files: ${changes}"
+    stages {
 
-            if (changes.contains("file1")) {
-                echo "Run Job1 logic 🚀"
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/sanjeevyadav32/testing-ap26.git'
             }
+        }
 
-            if (changes.contains("file2")) {
-                echo "Run Job2 logic 🚀"
+        stage('Build') {
+            steps {
+                echo "Building project..."
+                sh 'echo Hello from Jenkins Pipeline 🚀'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests..."
+                sh 'echo Tests passed ✅'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploy step..."
+                sh 'echo Deployment done 🎉'
             }
         }
     }
